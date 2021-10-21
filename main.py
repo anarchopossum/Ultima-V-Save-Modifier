@@ -9,9 +9,9 @@ def cnvt(j): #converts hex offset to be readable for mmap
 # edits the values of characters. Note: you can use this to edit individual characters if you comment out the other ones
 def char_adj(file, Str, Dex, Int, HPa, HPb, HMa, HMb, EXa, EXb, talk):
     if talk == 'c' or talk == 'C':
-        cst = input('Strength Val (255 Max)\n')      # Str
-        cdx = input('Dexterity Val (255 Max)\n')     # Dex
-        cit = input('Intelligence Val (255 Max)\n')  # Int
+        cst = int(input('Strength Val (255 Max)\n'))      # Str
+        cdx = int(input('Dexterity Val (255 Max)\n'))     # Dex
+        cit = int(input('Intelligence Val (255 Max)\n'))  # Int
     else:
         print('Max Values Set\n')
         cst = 99  # Str
@@ -32,12 +32,12 @@ def char_adj(file, Str, Dex, Int, HPa, HPb, HMa, HMb, EXa, EXb, talk):
 
 def item_adj(talk): #todo make the values editable for user
     if talk == 'y' or talk == 'Y':
-        mga = input('How Many Magic Axes (255 Max)\n')     # Magic_Axe
-        blb = input('How Many Black Badge (255 Max)\n')    # Black_badge
-        skk = input('How Many Skull Keys (255 Max)\n')     # Skull_Keys
-        mgc = input('How Many Magic Carpets (255 Max)\n')  # Magic_Carpet
-        gem = input('How Many Gems (255 Max)\n')           # gems
-        key = input('How Many Keys (255 Max)\n')           # key
+        mga = int(input('How Many Magic Axes (255 Max)\n'))     # Magic_Axe
+        blb = int(input('How Many Black Badge (255 Max)\n'))    # Black_badge
+        skk = int(input('How Many Skull Keys (255 Max)\n'))     # Skull_Keys
+        mgc = int(input('How Many Magic Carpets (255 Max)\n'))  # Magic_Carpet
+        gem = int(input('How Many Gems (255 Max)\n'))           # gems
+        key = int(input('How Many Keys (255 Max)\n'))           # key
     else:
         print('\nDefault modified values set.')
         mga = 10
