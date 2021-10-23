@@ -1,54 +1,52 @@
 import mmap
 
-
-def cnvt(j): #converts hex offset to be readable for mmap
+#converts hex offset to be readable for mmap
+def cnvt(j):
     a = int(j, 16)
     return(a)
 
-
+# adjusts values that use 2 hex memory locations
 def two_hex(dest_a, dest_b, value):
     if value <= 255: #checks if the value is less than or equal to 255
         hexd = hex(value)
-        hexd = hex(value).replace('x', '')
-        #var = hexd.split('0x',-1)
-        if len(hexd) == 1:
-            hexd = '000'+hexd
+        hexd = hex(value).replace('x', '') # Since Hex values on python come out
+        if len(hexd) == 1:                 # as '0x####' we remove the x and
+            hexd = '000'+hexd              # adjust the values as 4 digits
         elif len(hexd) == 2:
             hexd = '00' + hexd
 
     elif value > 255: #checks if greater than 255
         hexd = hex(value).replace('x', '')
-        #hexd = '0'+ hexd
         if len(hexd) == 4:
             pass
         elif len(hexd) == 5:
             hexd = hexd.replace('0','',1)
 
-    splitter = []
-    for index in range(0,len(hexd),2):
+    splitter = []                       # this splits the 4 digit hex to 2
+    for index in range(0,len(hexd),2):  # seperate Hex Values
         splitter.append(hexd[index:index+2])
     m[dest_a] = cnvt(splitter[1]) #first slot
     m[dest_b] = cnvt(splitter[0]) #second slot
 
 
-# edits the values of characters. Note: you can use this to edit individual characters if you comment out the other ones
+# edits the values of characters.
 def char_adj(Str, Dex, Int, HPa, HPb, HMa, HMb, EXa, EXb, talk):
     global hpv, hmv, exv, hmv
-    if talk == 'c' or talk == 'C':
+    if talk == 'c' or talk == 'C': # values modified by user
         cst = int(input('Strength Val (255 Max)\n'))      # Str
         cdx = int(input('Dexterity Val (255 Max)\n'))     # Dex
         cit = int(input('Intelligence Val (255 Max)\n'))  # Int
         hpv = int(input('Health Val (999 Max)\n'))        # HP
-        hmv = int(input('Max Health Val (255 Max)\n'))    # MH
-        exv = int(input('Experience Val (255 Max)\n'))    # Int
+        hmv = int(input('Max Health Val (999 Max)\n'))    # MH
+        exv = int(input('Experience Val (999 Max)\n'))    # Int
     else:
-        print('Max Values Set\n')
-        cst = 99  # Str
-        cdx = 99  # Dex
-        cit = 99  # Int
+        print('Max Values Set\n') # default modified values (Maxed)
+        cst = 99   # Str
+        cdx = 99   # Dex
+        cit = 99   # Int
         hpv = 999  # HP
         hmv = 999  # HM
-        exv = 9999  # exp
+        exv = 9999 # exp
     m = mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_WRITE)
     m[Str] = cst  # 63
     m[Dex] = cdx  # 63
@@ -60,7 +58,7 @@ def char_adj(Str, Dex, Int, HPa, HPb, HMa, HMb, EXa, EXb, talk):
 
 
 def item_adj(talk): #todo make the values editable for user
-    if talk == 'y' or talk == 'Y':
+    if talk == 'y' or talk == 'Y': #values modified by user
         mga = int(input('How Many Magic Axes (255 Max)\n'))     # Magic_Axe
         blb = int(input('How Many Black Badge (255 Max)\n'))    # Black_badge
         skk = int(input('How Many Skull Keys (255 Max)\n'))     # Skull_Keys
@@ -69,7 +67,7 @@ def item_adj(talk): #todo make the values editable for user
         key = int(input('How Many Keys (255 Max)\n'))           # key
         gld = int(input('How Much gold (9999 Max)\n'))          # gold
     else:
-        print('\nDefault modified values set.')
+        print('\nDefault modified values set.')# default modified values (Maxed)
         mga = 10
         blb = 1
         skk = 100
@@ -87,7 +85,8 @@ def item_adj(talk): #todo make the values editable for user
     m[cnvt('240')] = mga  # Magic_Axe
     m.flush()
 
-#two_hex(32,9)
+# Program Main Start
+
 print('   ULTIMA V SAVE EDITOR ')
 print('\nThis tool can max the stats of all characters within the game save file creator.\n!!! Make sure this python file '
       'is in the same directory as the INIT.GAM file or SAVED.GAM in order to work properly. !!!\nyou will be able to '
