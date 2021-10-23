@@ -165,3 +165,4 @@ if char_inp == 'exit':
     print('\n\n\n°º¤ø,¸¸,ø¤º°`°º¤ø,¸,ø¤°º¤ø,¸¸,ø')
     print('  User@Admin:~$ Sudo rm -r /*  ')
     print('°º¤ø,¸¸,ø¤º°`°º¤ø,¸,ø¤°º¤ø,¸¸,ø')
+    quit()
